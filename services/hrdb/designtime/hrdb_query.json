@@ -1,0 +1,33 @@
+{
+  "empCount" : {
+    "name" : "empCount",
+    "description" : "No description is provided",
+    "version" : "V1",
+    "queryString" : "select count(*) from Employee",
+    "countQueryString" : "select count(*) from (select count(*) from Employee) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.hrdb.models.query.EmpCountResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "C1",
+        "fieldName" : "c1",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  }
+}

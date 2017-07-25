@@ -1,0 +1,835 @@
+{
+  "customersRatio" : {
+    "name" : "customersRatio",
+    "description" : "returns the leads made per each category of sales reps",
+    "version" : "V1",
+    "queryString" : "SELECT\n            CASE\n            WHEN is_renewal = TRUE THEN 'Renewal'\n            ELSE 'New'\n            END Type,\n            COUNT(*) Percent\n            FROM SALES\n            WHERE MONTH(entry_date) = 1 and year(entry_date) = 2014\n            GROUP BY Type",
+    "countQueryString" : "select count(*) from (SELECT\n            CASE\n            WHEN is_renewal = TRUE THEN 'Renewal'\n            ELSE 'New'\n            END Type,\n            COUNT(*) Percent\n            FROM SALES\n            WHERE MONTH(entry_date) = 1 and year(entry_date) = 2014\n            GROUP BY Type) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "1",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.CustomersRatioResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "TYPE",
+        "fieldName" : "type",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.lang.String",
+          "list" : false
+        }
+      }, {
+        "name" : "PERCENT",
+        "fieldName" : "percent",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "eachRepCustomerWiseSales" : {
+    "name" : "eachRepCustomerWiseSales",
+    "description" : "returns each Representative Customer Vs Sales",
+    "version" : "V1",
+    "queryString" : "select c.name as CUSTOMER, sum(s.sales) as SALES from\n            quotes q join leads l on q.lead_id =l.id\n            join customers c on c.id = l.customer_id\n            join sales s on s.quote_id = q.id\n            where  q.rep_id = :id\n            group by c.id",
+    "countQueryString" : "select count(*) from (select c.name as CUSTOMER, sum(s.sales) as SALES from\n            quotes q join leads l on q.lead_id =l.id\n            join customers c on c.id = l.customer_id\n            join sales s on s.quote_id = q.id\n            where  q.rep_id = :id\n            group by c.id) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "id",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "1",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.EachRepCustomerWiseSalesResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "CUSTOMER",
+        "fieldName" : "customer",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.lang.String",
+          "list" : false
+        }
+      }, {
+        "name" : "SALES",
+        "fieldName" : "sales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "leadsByChannel" : {
+    "name" : "leadsByChannel",
+    "description" : "returns the leads made per each category of sales reps",
+    "version" : "V1",
+    "queryString" : "SELECT WEEK(q.entry_date)+1 AS Week, count(*) AS Leads\n            FROM quotes q join reps r on q.rep_id = r.id\n            WHERE r.channel_type = :channel\n            GROUP BY Week\n            ORDER BY Week",
+    "countQueryString" : "select count(*) from (SELECT WEEK(q.entry_date)+1 AS Week, count(*) AS Leads\n            FROM quotes q join reps r on q.rep_id = r.id\n            WHERE r.channel_type = :channel\n            GROUP BY Week\n            ORDER BY Week) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "channel",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.LeadsByChannelResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "WEEK",
+        "fieldName" : "week",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "LEADS",
+        "fieldName" : "leads",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "leadsCount" : {
+    "name" : "leadsCount",
+    "description" : "returns the count of leads taken over by sales reps in each channel",
+    "version" : "V1",
+    "queryString" : "SELECT COUNT(*) as LeadsCount\n            FROM   leads l, quotes q, reps r\n            WHERE q.lead_id = l.id and q.rep_id = r.id and r.channel_type = :channel",
+    "countQueryString" : "select count(*) from (SELECT COUNT(*) as LeadsCount\n            FROM   leads l, quotes q, reps r\n            WHERE q.lead_id = l.id and q.rep_id = r.id and r.channel_type = :channel) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "channel",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "3",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.LeadsCountResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "LEADSCOUNT",
+        "fieldName" : "leadscount",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "repsCount" : {
+    "name" : "repsCount",
+    "description" : "returns the count of sales reps in each channel",
+    "version" : "V1",
+    "queryString" : "SELECT COUNT(*) as RepsCount\n            FROM  reps r\n            WHERE r.channel_type = :channel",
+    "countQueryString" : "select count(*) from (SELECT COUNT(*) as RepsCount\n            FROM  reps r\n            WHERE r.channel_type = :channel) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "channel",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "3",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.RepsCountResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "REPSCOUNT",
+        "fieldName" : "repscount",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "revenueHeatMap" : {
+    "name" : "revenueHeatMap",
+    "description" : "returns the revenue generated in each state in a month",
+    "version" : "V1",
+    "queryString" : "SELECT usa.name State, sum(s.sales) Sales, count(c.id) Customers, count(l.id) Leads, count(q.id) Quotes\n            FROM sales s\n            JOIN quotes q ON q.id = s.quote_id\n            JOIN leads l ON q.lead_id = l.id\n            JOIN customers c ON l.customer_id = c.id\n            JOIN states usa ON usa.id = c.state_id\n            AND YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            GROUP BY State",
+    "countQueryString" : "select count(*) from (SELECT usa.name State, sum(s.sales) Sales, count(c.id) Customers, count(l.id) Leads, count(q.id) Quotes\n            FROM sales s\n            JOIN quotes q ON q.id = s.quote_id\n            JOIN leads l ON q.lead_id = l.id\n            JOIN customers c ON l.customer_id = c.id\n            JOIN states usa ON usa.id = c.state_id\n            AND YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            GROUP BY State) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "3",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.RevenueHeatMapResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "STATE",
+        "fieldName" : "state",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.lang.String",
+          "list" : false
+        }
+      }, {
+        "name" : "SALES",
+        "fieldName" : "sales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "CUSTOMERS",
+        "fieldName" : "customers",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "LEADS",
+        "fieldName" : "leads",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "QUOTES",
+        "fieldName" : "quotes",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "salesByChannels" : {
+    "name" : "salesByChannels",
+    "description" : "returns the sales converted per each channel",
+    "version" : "V1",
+    "queryString" : "select c.name Channel, ROUND(sum(s.sales)*100/(SELECT sum(sales) FROM sales)) Percent\n            FROM sales s\n            inner join quotes q on q.id = s.quote_id\n            inner join reps r on r.id = q.rep_id\n            right outer join channels c on r.channel_type = c.id\n            WHERE YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            group by Channel",
+    "countQueryString" : "select count(*) from (select c.name Channel, ROUND(sum(s.sales)*100/(SELECT sum(sales) FROM sales)) Percent\n            FROM sales s\n            inner join quotes q on q.id = s.quote_id\n            inner join reps r on r.id = q.rep_id\n            right outer join channels c on r.channel_type = c.id\n            WHERE YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            group by Channel) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "4",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.SalesByChannelsResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "CHANNEL",
+        "fieldName" : "channel",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.lang.String",
+          "list" : false
+        }
+      }, {
+        "name" : "PERCENT",
+        "fieldName" : "percent",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "salesByEachRep" : {
+    "name" : "salesByEachRep",
+    "description" : "returns the sales made by each representative",
+    "version" : "V1",
+    "queryString" : "SELECT MONTHNAME(s.entry_date) AS MONTHNAME, count(*) AS SALES\n            FROM quotes q join reps r on q.rep_id = r.id\n            join sales s on s.quote_id =q.id\n            WHERE r.id =:id AND YEAR(s.entry_date) = YEAR(CURDATE())\n            GROUP BY MONTHNAME",
+    "countQueryString" : "select count(*) from (SELECT MONTHNAME(s.entry_date) AS MONTHNAME, count(*) AS SALES\n            FROM quotes q join reps r on q.rep_id = r.id\n            join sales s on s.quote_id =q.id\n            WHERE r.id =:id AND YEAR(s.entry_date) = YEAR(CURDATE())\n            GROUP BY MONTHNAME) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "id",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "1",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.SalesByEachRepResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "MONTHNAME",
+        "fieldName" : "monthname",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.lang.String",
+          "list" : false
+        }
+      }, {
+        "name" : "SALES",
+        "fieldName" : "sales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "salesByReps" : {
+    "name" : "salesByReps",
+    "description" : "returns the revenue generated per each category of sales representatives",
+    "version" : "V1",
+    "queryString" : "select r.name Name, count(q.lead_id) Leads, sum(s.sales) Sales\n            FROM leads l\n            JOIN quotes q on q.lead_id = l.id\n            JOIN sales s on s.quote_id = q.id\n            RIGHT OUTER JOIN reps r on r.id = q.rep_id\n            WHERE r.channel_type = :channel\n            GROUP BY Name\n            ORDER BY Sales desc, Leads desc",
+    "countQueryString" : "select count(*) from (select r.name Name, count(q.lead_id) Leads, sum(s.sales) Sales\n            FROM leads l\n            JOIN quotes q on q.lead_id = l.id\n            JOIN sales s on s.quote_id = q.id\n            RIGHT OUTER JOIN reps r on r.id = q.rep_id\n            WHERE r.channel_type = :channel\n            GROUP BY Name\n            ORDER BY Sales desc, Leads desc) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "channel",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.SalesByRepsResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "NAME",
+        "fieldName" : "name",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.lang.String",
+          "list" : false
+        }
+      }, {
+        "name" : "LEADS",
+        "fieldName" : "leads",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "SALES",
+        "fieldName" : "sales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "salesRevenueAndCount" : {
+    "name" : "salesRevenueAndCount",
+    "description" : "returns the total sales revenue generated & count of sales made per each category of sales reps",
+    "version" : "V1",
+    "queryString" : "SELECT SUM(sales) as SalesRevenue, COUNT(sales) as TotalSales\nFROM sales s,  quotes q, reps r \nWHERE s.quote_id = q.id and q.rep_id = r.id and r.channel_type = :channel",
+    "countQueryString" : "select count(*) from (SELECT SUM(sales) as SalesRevenue, COUNT(sales) as TotalSales\nFROM sales s,  quotes q, reps r \nWHERE s.quote_id = q.id and q.rep_id = r.id and r.channel_type = :channel) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "channel",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.SalesRevenueAndCountResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "SALESREVENUE",
+        "fieldName" : "salesrevenue",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "TOTALSALES",
+        "fieldName" : "totalsales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "topTrendingProducts" : {
+    "name" : "topTrendingProducts",
+    "description" : "returns the top trending products of the week",
+    "version" : "V1",
+    "queryString" : "SELECT p.name as Product, s.sales as Sales\n            FROM Products p, Sales s\n            WHERE p.id = s.product_id\n            AND YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            ORDER BY Sales DESC",
+    "countQueryString" : "select count(*) from (SELECT p.name as Product, s.sales as Sales\n            FROM Products p, Sales s\n            WHERE p.id = s.product_id\n            AND YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            ORDER BY Sales DESC) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "3",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.TopTrendingProductsResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "PRODUCT",
+        "fieldName" : "product",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.lang.String",
+          "list" : false
+        }
+      }, {
+        "name" : "SALES",
+        "fieldName" : "sales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "weeklyConverted" : {
+    "name" : "weeklyConverted",
+    "description" : "returns the sales converted per each week",
+    "version" : "V1",
+    "queryString" : "SELECT WEEK(entry_date)+1 AS Week, count(*) AS Sales\n            FROM sales\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week",
+    "countQueryString" : "select count(*) from (SELECT WEEK(entry_date)+1 AS Week, count(*) AS Sales\n            FROM sales\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.WeeklyConvertedResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "WEEK",
+        "fieldName" : "week",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "SALES",
+        "fieldName" : "sales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "weeklyFollowUps" : {
+    "name" : "weeklyFollowUps",
+    "description" : "returns the follow-ups made in a month",
+    "version" : "V1",
+    "queryString" : "SELECT WEEK(entry_date)+1 AS Week, count(*) AS FollowUps\n            FROM follow_ups\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week",
+    "countQueryString" : "select count(*) from (SELECT WEEK(entry_date)+1 AS Week, count(*) AS FollowUps\n            FROM follow_ups\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "3",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.WeeklyFollowUpsResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "WEEK",
+        "fieldName" : "week",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "FOLLOWUPS",
+        "fieldName" : "followups",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "weeklyLeads" : {
+    "name" : "weeklyLeads",
+    "description" : "returns the leads created per each week",
+    "version" : "V1",
+    "queryString" : "SELECT WEEK(entry_date)+1 AS Week, count(*) AS Leads\n            FROM leads\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week",
+    "countQueryString" : "select count(*) from (SELECT WEEK(entry_date)+1 AS Week, count(*) AS Leads\n            FROM leads\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.WeeklyLeadsResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "WEEK",
+        "fieldName" : "week",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "LEADS",
+        "fieldName" : "leads",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "weeklyQuotes" : {
+    "name" : "weeklyQuotes",
+    "description" : "returns the quotes made in a month per each week",
+    "version" : "V1",
+    "queryString" : "SELECT WEEK(entry_date)+1 AS Week, count(*) AS Quotes\n            FROM quotes\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week",
+    "countQueryString" : "select count(*) from (SELECT WEEK(entry_date)+1 AS Week, count(*) AS Quotes\n            FROM quotes\n            WHERE YEAR(entry_date) =  :year\n            AND MONTH(entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "3",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.WeeklyQuotesResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "WEEK",
+        "fieldName" : "week",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "QUOTES",
+        "fieldName" : "quotes",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  },
+  "weeklySales" : {
+    "name" : "weeklySales",
+    "description" : "returns the sales generated per each week",
+    "version" : "V1",
+    "queryString" : "SELECT WEEK(s.entry_date)+1 AS Week, sum(s.sales) AS Sales\n            FROM sales s\n            WHERE YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week",
+    "countQueryString" : "select count(*) from (SELECT WEEK(s.entry_date)+1 AS Week, sum(s.sales) AS Sales\n            FROM sales s\n            WHERE YEAR(s.entry_date) =  :year\n            AND MONTH(s.entry_date) = :month\n            GROUP BY Week\n            ORDER BY Week) wmTempTable",
+    "nativeSql" : true,
+    "fetchCount" : true,
+    "type" : "SELECT",
+    "parameters" : [ {
+      "name" : "year",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2014",
+      "required" : false
+    }, {
+      "name" : "month",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "3",
+      "required" : false
+    } ],
+    "request" : {
+      "wrapped" : false,
+      "typeRef" : null,
+      "method" : "GET"
+    },
+    "response" : {
+      "typeRef" : "com.salesdb.models.query.WeeklySalesResponse",
+      "returns" : "CUSTOM",
+      "responseType" : "PAGINATED",
+      "properties" : [ {
+        "name" : "WEEK",
+        "fieldName" : "week",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      }, {
+        "name" : "SALES",
+        "fieldName" : "sales",
+        "optional" : false,
+        "fieldType" : {
+          "type" : "PRIMITIVE",
+          "typeRef" : "java.math.BigInteger",
+          "list" : false
+        }
+      } ]
+    }
+  }
+}

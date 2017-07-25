@@ -1,0 +1,81 @@
+{
+  "description" : "test2323",
+  "draft" : true,
+  "name" : "test2323",
+  "packageName" : "com.salesvision2_0.test2323",
+  "tables" : [ {
+    "catalog" : null,
+    "columns" : [ {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : ""
+      },
+      "fieldName" : "id",
+      "foreignKey" : false,
+      "generatorType" : "identity",
+      "generatorValue" : "",
+      "javaType" : "integer",
+      "length" : 255,
+      "name" : "ID",
+      "nullable" : false,
+      "oldName" : null,
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : true,
+      "partOfUniqueKey" : true,
+      "precision" : 10,
+      "primaryKey" : true,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "number",
+      "unique" : true
+    }, {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : ""
+      },
+      "fieldName" : "column2",
+      "foreignKey" : false,
+      "generatorType" : "assigned",
+      "generatorValue" : null,
+      "javaType" : "string",
+      "length" : 255,
+      "name" : "COLUMN2",
+      "nullable" : true,
+      "oldName" : null,
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : false,
+      "partOfUniqueKey" : false,
+      "precision" : 0,
+      "primaryKey" : false,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "string",
+      "unique" : false
+    } ],
+    "constraints" : [ ],
+    "entityName" : "User",
+    "fullyQualifiedName" : "com.salesvision2_0.test2323.User",
+    "name" : "User",
+    "oldName" : null,
+    "primaryKey" : {
+      "columns" : [ "ID" ],
+      "composite" : false,
+      "generator" : {
+        "generatorType" : "identity",
+        "generatorValue" : "",
+        "schemaName" : null
+      },
+      "name" : null,
+      "virtual" : false
+    },
+    "relations" : [ ],
+    "schema" : null,
+    "type" : "TABLE"
+  } ]
+}

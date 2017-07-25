@@ -1,0 +1,101 @@
+[ {
+  "name" : "AdminDash",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Common",
+  "type" : "PARTIAL",
+  "params" : [ ]
+}, {
+  "name" : "CustomerRepo",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "CustomerRepoTest",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Dashboard",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "EmployeeInfo",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Leads",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Locations",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Login",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Main",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Page",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "Page1",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "SalesGrowth",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "SalesReps",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "aa",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "ep",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "footer",
+  "type" : "PARTIAL",
+  "params" : [ ]
+}, {
+  "name" : "header",
+  "type" : "PARTIAL",
+  "params" : [ ]
+}, {
+  "name" : "leadsList",
+  "type" : "PARTIAL",
+  "params" : [ ]
+}, {
+  "name" : "leftnav",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "p",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "rightnav",
+  "type" : "PAGE",
+  "params" : [ ]
+}, {
+  "name" : "salesgrowthfilter",
+  "type" : "PARTIAL",
+  "params" : [ ]
+}, {
+  "name" : "systemvitalsfilter",
+  "type" : "PARTIAL",
+  "params" : [ ]
+}, {
+  "name" : "topnav",
+  "type" : "PARTIAL",
+  "params" : [ ]
+} ]

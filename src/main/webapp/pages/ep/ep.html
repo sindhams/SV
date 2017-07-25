@@ -1,0 +1,21 @@
+<wm-page data-ng-controller="epPageController" pagetitle="Ep" name="page1"> 
+ <wm-content name="content1"> 
+  <wm-page-content columnwidth="12" name="page_content1"> 
+   <wm-grid readonlygrid="false" title="Employee List" dataset="bind:Variables.HrdbEmployeeData.dataSet" navigation="Basic" name="grid2"> 
+    <wm-grid-column binding="eid" caption="Eid" generator="identity" pcdisplay="true" mobiledisplay="true" type="integer" primary-key="true"></wm-grid-column> 
+    <wm-grid-column binding="firstname" caption="Firstname" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-column binding="lastname" caption="Lastname" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-column binding="street" caption="Street" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-column binding="city" caption="City" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-column binding="state" caption="State" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-column binding="zip" caption="Zip" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-column binding="birthdate" caption="Birthdate" pcdisplay="true" mobiledisplay="true" type="date"></wm-grid-column> 
+    <wm-grid-column binding="picurl" caption="Picurl" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-column binding="twitterid" caption="Twitterid" pcdisplay="true" mobiledisplay="true" type="string"></wm-grid-column> 
+    <wm-grid-action key="addNewRow" display-name="New" iconclass="wi wi-plus" show="true" class="btn-primary" action="addNewRow()"></wm-grid-action> 
+    <wm-grid-row-action key="updaterow" display-name="" title="Edit" iconclass="wi wi-pencil" show="true" class="btn-transparent" action="editRow()"></wm-grid-row-action> 
+    <wm-grid-row-action key="deleterow" display-name="" title="Delete" iconclass="wi wi-trash" show="true" class="btn-transparent" action="deleteRow()"></wm-grid-row-action> 
+   </wm-grid> 
+  </wm-page-content> 
+ </wm-content> 
+</wm-page>

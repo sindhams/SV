@@ -1,0 +1,14 @@
+{
+  "ChannelsController" : { },
+  "CustomersController" : { },
+  "FollowUpsController" : { },
+  "LeadsController" : { },
+  "ProcedureExecutionController" : { },
+  "ProductsController" : { },
+  "QueryExecutionController" : { },
+  "QuotesController" : { },
+  "RepsController" : { },
+  "SalesController" : { },
+  "StatesController" : { },
+  "TasksController" : { }
+}

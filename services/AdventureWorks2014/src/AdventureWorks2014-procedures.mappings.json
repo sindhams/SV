@@ -1,0 +1,22 @@
+{
+  "testproc1" : {
+    "procedureString" : "Exec HumanResources.getDeparmentInfoOut ?,?",
+    "parameters" : [ {
+      "name" : "deptid",
+      "type" : "integer",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : "2",
+      "required" : true,
+      "parameterType" : "IN"
+    }, {
+      "name" : "Name",
+      "type" : "string",
+      "list" : false,
+      "variableType" : "PROMPT",
+      "testValue" : null,
+      "required" : true,
+      "parameterType" : "OUT"
+    } ]
+  }
+}

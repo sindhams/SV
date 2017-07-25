@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="test2323" type="DataService" springFile="test2323.spring.xml">
+    <dataobjects/>
+</service>

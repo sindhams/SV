@@ -1,0 +1,359 @@
+{
+  "description" : "MyTestDatabase",
+  "draft" : false,
+  "name" : "MyTestDatabase",
+  "packageName" : "com.salesvision2_0.mytestdatabase",
+  "tables" : [ {
+    "catalog" : "MyTestDatabase",
+    "columns" : [ {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "id",
+      "foreignKey" : false,
+      "generatorType" : "identity",
+      "generatorValue" : null,
+      "javaType" : "integer",
+      "length" : 0,
+      "name" : "ID",
+      "nullable" : false,
+      "oldName" : "ID",
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : true,
+      "partOfUniqueKey" : true,
+      "precision" : 10,
+      "primaryKey" : true,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "number",
+      "unique" : true
+    }, {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "city",
+      "foreignKey" : false,
+      "generatorType" : "assigned",
+      "generatorValue" : null,
+      "javaType" : "string",
+      "length" : 255,
+      "name" : "City",
+      "nullable" : true,
+      "oldName" : "City",
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : false,
+      "partOfUniqueKey" : false,
+      "precision" : 0,
+      "primaryKey" : false,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "string",
+      "unique" : false
+    } ],
+    "constraints" : [ ],
+    "entityName" : "City",
+    "fullyQualifiedName" : "com.salesvision2_0.mytestdatabase.City",
+    "name" : "City",
+    "oldName" : "City",
+    "primaryKey" : {
+      "columns" : [ "ID" ],
+      "composite" : false,
+      "generator" : {
+        "generatorType" : "identity",
+        "generatorValue" : null,
+        "schemaName" : null
+      },
+      "name" : "PRIMARY",
+      "virtual" : false
+    },
+    "relations" : [ {
+      "cardinality" : "OneToMany",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "personnels",
+      "mappings" : [ {
+        "sourceColumn" : "ID",
+        "targetColumn" : "City_code"
+      } ],
+      "name" : "FK_ti8msplx34ee35x8h11lf0dma",
+      "primary" : false,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "City",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "Personnel",
+      "virtual" : false
+    } ],
+    "schema" : null,
+    "type" : "TABLE"
+  }, {
+    "catalog" : "MyTestDatabase",
+    "columns" : [ {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "id",
+      "foreignKey" : false,
+      "generatorType" : "identity",
+      "generatorValue" : null,
+      "javaType" : "integer",
+      "length" : 0,
+      "name" : "ID",
+      "nullable" : false,
+      "oldName" : "ID",
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : true,
+      "partOfUniqueKey" : true,
+      "precision" : 10,
+      "primaryKey" : true,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "number",
+      "unique" : true
+    }, {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "name",
+      "foreignKey" : false,
+      "generatorType" : "assigned",
+      "generatorValue" : null,
+      "javaType" : "string",
+      "length" : 15,
+      "name" : "Name",
+      "nullable" : true,
+      "oldName" : "Name",
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : false,
+      "partOfUniqueKey" : false,
+      "precision" : 0,
+      "primaryKey" : false,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "string",
+      "unique" : false
+    }, {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "cityCode",
+      "foreignKey" : true,
+      "generatorType" : "assigned",
+      "generatorValue" : null,
+      "javaType" : "integer",
+      "length" : 0,
+      "name" : "City_code",
+      "nullable" : true,
+      "oldName" : "City_code",
+      "partOfAnyRelation" : true,
+      "partOfForeignKey" : true,
+      "partOfPrimaryKey" : false,
+      "partOfUniqueKey" : false,
+      "precision" : 10,
+      "primaryKey" : false,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "number",
+      "unique" : false
+    } ],
+    "constraints" : [ ],
+    "entityName" : "Personnel",
+    "fullyQualifiedName" : "com.salesvision2_0.mytestdatabase.Personnel",
+    "name" : "Personnel",
+    "oldName" : "Personnel",
+    "primaryKey" : {
+      "columns" : [ "ID" ],
+      "composite" : false,
+      "generator" : {
+        "generatorType" : "identity",
+        "generatorValue" : null,
+        "schemaName" : null
+      },
+      "name" : "PRIMARY",
+      "virtual" : false
+    },
+    "relations" : [ {
+      "cardinality" : "ManyToOne",
+      "columnsUniqueKey" : false,
+      "composite" : false,
+      "fieldName" : "city",
+      "mappings" : [ {
+        "sourceColumn" : "City_code",
+        "targetColumn" : "ID"
+      } ],
+      "name" : "FK_ti8msplx34ee35x8h11lf0dma",
+      "primary" : true,
+      "selfRelation" : false,
+      "sourceColumnsNotUniqueKey" : true,
+      "sourceTable" : "Personnel",
+      "targetColumnsUniqueKey" : false,
+      "targetTable" : "City",
+      "virtual" : false
+    } ],
+    "schema" : null,
+    "type" : "TABLE"
+  }, {
+    "catalog" : "MyTestDatabase",
+    "columns" : [ {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "id",
+      "foreignKey" : false,
+      "generatorType" : "identity",
+      "generatorValue" : null,
+      "javaType" : "integer",
+      "length" : 0,
+      "name" : "ID",
+      "nullable" : false,
+      "oldName" : "ID",
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : true,
+      "partOfUniqueKey" : true,
+      "precision" : 10,
+      "primaryKey" : true,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "number",
+      "unique" : true
+    } ],
+    "constraints" : [ ],
+    "entityName" : "Table1",
+    "fullyQualifiedName" : "com.salesvision2_0.mytestdatabase.Table1",
+    "name" : "TABLE1",
+    "oldName" : "TABLE1",
+    "primaryKey" : {
+      "columns" : [ "ID" ],
+      "composite" : false,
+      "generator" : {
+        "generatorType" : "identity",
+        "generatorValue" : null,
+        "schemaName" : null
+      },
+      "name" : "PRIMARY",
+      "virtual" : false
+    },
+    "relations" : [ ],
+    "schema" : null,
+    "type" : "TABLE"
+  }, {
+    "catalog" : "MyTestDatabase",
+    "columns" : [ {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "id",
+      "foreignKey" : false,
+      "generatorType" : "identity",
+      "generatorValue" : null,
+      "javaType" : "integer",
+      "length" : 0,
+      "name" : "ID",
+      "nullable" : false,
+      "oldName" : "ID",
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : true,
+      "partOfUniqueKey" : true,
+      "precision" : 10,
+      "primaryKey" : true,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "number",
+      "unique" : true
+    } ],
+    "constraints" : [ ],
+    "entityName" : "Table2",
+    "fullyQualifiedName" : "com.salesvision2_0.mytestdatabase.Table2",
+    "name" : "TABLE2",
+    "oldName" : "TABLE2",
+    "primaryKey" : {
+      "columns" : [ "ID" ],
+      "composite" : false,
+      "generator" : {
+        "generatorType" : "identity",
+        "generatorValue" : null,
+        "schemaName" : null
+      },
+      "name" : "PRIMARY",
+      "virtual" : false
+    },
+    "relations" : [ ],
+    "schema" : null,
+    "type" : "TABLE"
+  }, {
+    "catalog" : "MyTestDatabase",
+    "columns" : [ {
+      "columnValue" : {
+        "type" : "user-defined",
+        "insertable" : true,
+        "updatable" : true,
+        "defaultValue" : null
+      },
+      "fieldName" : "id",
+      "foreignKey" : false,
+      "generatorType" : "identity",
+      "generatorValue" : null,
+      "javaType" : "integer",
+      "length" : 0,
+      "name" : "ID",
+      "nullable" : false,
+      "oldName" : "ID",
+      "partOfAnyRelation" : false,
+      "partOfForeignKey" : false,
+      "partOfPrimaryKey" : true,
+      "partOfUniqueKey" : true,
+      "precision" : 10,
+      "primaryKey" : true,
+      "scale" : 0,
+      "sequenceSchema" : null,
+      "sqlType" : "number",
+      "unique" : true
+    } ],
+    "constraints" : [ ],
+    "entityName" : "Table3",
+    "fullyQualifiedName" : "com.salesvision2_0.mytestdatabase.Table3",
+    "name" : "TABLE3",
+    "oldName" : "TABLE3",
+    "primaryKey" : {
+      "columns" : [ "ID" ],
+      "composite" : false,
+      "generator" : {
+        "generatorType" : "identity",
+        "generatorValue" : null,
+        "schemaName" : null
+      },
+      "name" : "PRIMARY",
+      "virtual" : false
+    },
+    "relations" : [ ],
+    "schema" : null,
+    "type" : "TABLE"
+  } ]
+}

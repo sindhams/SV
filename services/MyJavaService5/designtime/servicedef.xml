@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<service xmlns="http://www.activegrid.com/namespaces/ServiceDefinitions/1.0" id="MyJavaService5" class="com.salesvision2_0.myjavaservice5.MyJavaService5" type="JavaService" springFile="MyJavaService5.spring.xml">
+    <operation name="sampleJavaOperation">
+        <parameter name="name" typeRef="java.lang.String" isList="false"/>
+        <parameter name="request" typeRef="javax.servlet.http.HttpServletRequest" isList="false"/>
+        <return typeRef="java.lang.String" isList="false"/>
+    </operation>
+    <dataobjects/>
+</service>

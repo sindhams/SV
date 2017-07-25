@@ -1,0 +1,66 @@
+{
+  "username" : "sa",
+  "password" : "7b6a43524a353f3a664c733d4e537670477c612a43",
+  "url" : "jdbc:sqlserver://52.12.227.219:1433;databaseName=AdventureWorks2014",
+  "driverClass" : "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+  "dialect" : "com.wavemaker.runtime.data.dialect.WMSQLServerDialect",
+  "serviceId" : "AdventureWorks2014",
+  "packageName" : "com.salesvision2_0.adventureworks2014",
+  "dbType" : "SQLServer",
+  "host" : "52.12.227.219",
+  "dbName" : "AdventureWorks2014",
+  "port" : "1433",
+  "schemaName" : "HumanResources",
+  "tableFilter" : [ {
+    "table" : "Department",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "Employee",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "EmployeeDepartmentHistory",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "EmployeePayHistory",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "JobCandidate",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "Shift",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "vEmployee",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "vEmployeeDepartment",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "vEmployeeDepartmentHistory",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "vJobCandidate",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "vJobCandidateEducation",
+    "schema" : "HumanResources"
+  }, {
+    "table" : "vJobCandidateEmployment",
+    "schema" : "HumanResources"
+  } ],
+  "schemaFilter" : [ "HumanResources" ],
+  "impersonateUser" : false,
+  "activeDirectoryDomain" : null,
+  "hbm2ddl" : "none",
+  "maxPageSize" : 100,
+  "minPoolSize" : 2,
+  "maxPoolSize" : 4,
+  "dataSourceType" : "WM_MANAGED_DATASOURCE",
+  "jndiName" : "",
+  "reloadInfo" : {
+    "reload" : false,
+    "reason" : null,
+    "message" : null
+  },
+  "readOnly" : true
+}
