@@ -4,6 +4,7 @@
 [name='productsChart'] {
     background: -webkit-linear-gradient(left, #feffff 10%, #7ECFFA 100%);
     /* Webkit (Chrome 11+) */
+    /* Webkit (Chrome 11+) */
     background: -webkit-linear-gradient(left, #feffff 10%, #7ECFFA 100%);
     /* Mozilla Firefox */
     background: -moz-linear-gradient(left, #feffff 10%, #7ECFFA 100%);
